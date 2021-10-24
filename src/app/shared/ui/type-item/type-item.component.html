@@ -1,0 +1,31 @@
+<ng-container *ngIf="!editMode; else elseTemplate">
+    <div class="row">
+        <small class="text-muted form-text">{{ type.id }}</small>
+        <div class="col-12">Название: {{ type.name }}</div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary" (click)="editMode = true">Редактировать</button>
+            <button class="btn btn-danger" (click)="delete()">Удалить</button>
+        </div>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <form [formGroup]="typeForm" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-12">
+                Название:
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="name"
+                    [ngClass]="{ 'has-error': typeForm.get('name')?.invalid }"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit" [disabled]="typeForm.invalid">Сохранить</button>
+            </div>
+        </div>
+    </form>
+</ng-template>

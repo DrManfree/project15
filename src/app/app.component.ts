@@ -1,7 +1,9 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Card } from './shared/interfaces/card.interface';
+import { Type } from './shared/interfaces/type.interface';
 import { CardsService } from './shared/services/cards.service';
+import { TypesService } from './shared/services/types.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,9 @@ import { CardsService } from './shared/services/cards.service';
 export class AppComponent implements OnInit {
 
   cards!: Card[];
+  types!: Type[];
 
-  constructor(private cardService: CardsService) {}
+  constructor(private cardService: CardsService, private typeService: TypesService) {}
   ngOnInit(): void {
     this.getData();
   }
@@ -20,6 +23,7 @@ export class AppComponent implements OnInit {
   async getData() {
     try {
       this.cards = await this.cardService.getCards() || [];
+      this.types = await this.typeService.getTypes() || [];
     } catch (error) {
       console.log(error)
     }
@@ -49,6 +53,35 @@ export class AppComponent implements OnInit {
       this.getData();
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async deleteT(id: number)
+  {
+    try {
+      await this.typeService.deleteType(id);
+      this.getData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async editT(id: number, type: Type)
+  {
+    try {
+      await this.typeService.putType(id, type);
+      this.getData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async saveT(type: Type) {
+    try {
+      await this.typeService.postType(type);
+      this.getData();
+    } catch (error) {
+      console.log(error)
     }
   }
 }

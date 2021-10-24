@@ -5,4 +5,13 @@
       <app-card-item [card]="card" (onDelete)="deleteC($event)" (onSave)="edit(card.id, $event)"></app-card-item>
     </div>
   </div>
+  <hr>
+  <hr>
+  <hr>
+  <app-type-form (onSaveT)="saveT($event)"></app-type-form>
+  <div class="row mt-3">
+    <div class="col-4" *ngFor="let type of types">
+      <app-type-item [type]="type" (onDelete)="deleteT($event)" (onSave)="editT(type.id, $event)"></app-type-item>
+    </div>
+  </div>
 </div>
