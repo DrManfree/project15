@@ -1,0 +1,67 @@
+<ng-container *ngIf="!editMode; else elseTemplate">
+    <div class="row">
+        <small class="text-muted form-text">{{ card.id }}</small>
+        <div class="col-12">Название: {{ card.name }}</div>
+        <div class="col-12">Содержимое: {{ card.content }}</div>
+        <div class="col-12">Тип: {{ card.type }}</div>
+        <div class="col-12">Создано: {{ card.createdate }}</div>
+        <div class="col-12">Редактировано: {{ card.editdate }}</div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary" (click)="editMode = true">Редактировать</button>
+            <button class="btn btn-danger" (click)="delete()">Удалить</button>
+        </div>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <form [formGroup]="cardForm" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-12">
+                Название:
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="name"
+                    [ngClass]="{ 'has-error': cardForm.get('name')?.invalid }"/>
+            </div>
+            <div class="col-12">
+                Содержимое:
+                <textarea 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="content"
+                    [ngClass]="{ 'has-error': cardForm.get('content')?.invalid }">
+                </textarea>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    Тип заметки:
+                    <select 
+                        class="form-control" 
+                        id="typeSelect"
+                        formControlName="type"
+                        required="true"
+                        [ngClass]="{
+                            'has-error': 
+                               cardForm.get('type')?.invalid && 
+                               cardForm.get('type')?.touched
+                           }"
+                    >
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+            </div>
+        </div>
+    </form>
+</ng-template>

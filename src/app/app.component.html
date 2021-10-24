@@ -1,0 +1,8 @@
+<div class="container">
+  <app-card-form (onSave)="save($event)"></app-card-form>
+  <div class="row mt-3">
+    <div class="col-4" *ngFor="let card of cards">
+      <app-card-item [card]="card" (onDelete)="deleteC($event)" (onSave)="edit(card.id, $event)"></app-card-item>
+    </div>
+  </div>
+</div>
