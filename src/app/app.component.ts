@@ -44,6 +44,11 @@ export class AppComponent implements OnInit {
   }
 
   async edit(id: number, card: Card) {
-    
+    try {
+      await this.cardService.putCard(id, card);
+      this.getData();
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

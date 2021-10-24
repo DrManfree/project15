@@ -21,7 +21,8 @@ export class CardItemComponent implements OnInit {
     const controls = {
       name: [null, [Validators.required, Validators.maxLength(100)]],
       content: [null, [Validators.required, Validators.maxLength(500)]],
-      type: [null]
+      type: [null],
+      createdate: [null]
     }
 
     this.cardForm = this.fb.group(controls);

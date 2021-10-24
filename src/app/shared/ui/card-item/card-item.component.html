@@ -44,8 +44,7 @@
                         required="true"
                         [ngClass]="{
                             'has-error': 
-                               cardForm.get('type')?.invalid && 
-                               cardForm.get('type')?.touched
+                               cardForm.get('type')?.invalid
                            }"
                     >
                     <option></option>
@@ -60,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Сохранить</button>
+                <button class="btn btn-primary" type="submit" [disabled]="cardForm.invalid">Сохранить</button>
             </div>
         </div>
     </form>
