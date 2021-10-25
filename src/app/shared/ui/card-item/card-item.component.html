@@ -38,22 +38,20 @@
                 <div class="form-group">
                     Тип заметки:
                     <select 
-                        class="form-control" 
-                        id="typeSelect"
-                        formControlName="type"
-                        required="true"
-                        [ngClass]="{
-                            'has-error': 
-                               cardForm.get('type')?.invalid
-                           }"
-                    >
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    </select>
+                    class="form-control" 
+                    id="typeSelect"
+                    formControlName="type"
+                    required="true"
+                    
+                    [ngClass]="{
+                        'has-error': 
+                           cardForm.get('type')?.invalid && 
+                           cardForm.get('type')?.touched
+                       }"
+                >
+                <option [ngValue]="null">Выберите тип заметки</option>
+                <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
+                </select>
                 </div>
             </div>
         </div>

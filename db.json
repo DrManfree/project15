@@ -1,13 +1,5 @@
 {
-  "cards": [
-    {
-      "name": "asdf",
-      "content": "asdfasd",
-      "type": "3",
-      "createdate": "2021-10-24T23:22:10.988Z",
-      "id": 1
-    }
-  ],
+  "cards": [],
   "types": [
     {
       "name": "Покупки",

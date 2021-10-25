@@ -3,6 +3,8 @@ import { Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Card } from '../../interfaces/card.interface';
+import { Type } from '../../interfaces/type.interface';
+import { TypesService } from '../../services/types.service';
 
 @Component({
   selector: 'app-card-form',
@@ -12,14 +14,23 @@ import { Card } from '../../interfaces/card.interface';
 export class CardFormComponent implements OnInit {
   @Output() onSave = new EventEmitter<Card>();
   cardForm!: FormGroup;
+  types!: Type[];
+  constructor(private fb: FormBuilder, private typeService: TypesService) { }
 
-  constructor(private fb: FormBuilder) { }
+  async getData() {
+    try {
+      this.types = await this.typeService.getTypes() || [];
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   ngOnInit(): void {
+    this.getData();
     const controls = {
       name : [null, [Validators.required, Validators.maxLength(100)]],
       content : [null, [Validators.required, Validators.maxLength(500)]],
-      type : [null]
+      type : ['', [Validators.required]]
     }
     this.cardForm = this.fb.group(controls);
   }

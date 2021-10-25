@@ -1,14 +1,18 @@
 <div class="container">
+  <h3>Создать заметку</h3>
   <app-card-form (onSave)="save($event)"></app-card-form>
+  <hr>
+  <h3>Список заметок</h3>
   <div class="row mt-3">
     <div class="col-4" *ngFor="let card of cards">
       <app-card-item [card]="card" (onDelete)="deleteC($event)" (onSave)="edit(card.id, $event)"></app-card-item>
     </div>
   </div>
   <hr>
-  <hr>
-  <hr>
+  <h3>Создать тип заметки</h3>
   <app-type-form (onSaveT)="saveT($event)"></app-type-form>
+  <hr>
+  <h3>Словарь типов заметок</h3>
   <div class="row mt-3">
     <div class="col-4" *ngFor="let type of types">
       <app-type-item [type]="type" (onDelete)="deleteT($event)" (onSave)="editT(type.id, $event)"></app-type-item>

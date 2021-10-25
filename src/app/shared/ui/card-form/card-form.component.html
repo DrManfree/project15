@@ -44,23 +44,19 @@
                     id="typeSelect"
                     formControlName="type"
                     required="true"
+                    
                     [ngClass]="{
                         'has-error': 
                            cardForm.get('type')?.invalid && 
                            cardForm.get('type')?.touched
                        }"
                 >
-                <option></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option [ngValue]="null">Выберите тип заметки</option>
+                <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
                 </select>
                 <small class="form-text text-muted">Обязательно</small>
             </div>
         </div>
-        <hr>
         <div class="col-12">
             <button 
             type="submit" 
